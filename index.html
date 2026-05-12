@@ -1809,9 +1809,9 @@ footer {
           <label>Message</label>
           <textarea rows="5" placeholder="Tell me about your project..."></textarea>
         </div>
-        <button class="btn-submit" onclick="handleSubmit(this)">
-          <i class="fas fa-paper-plane"></i>Send Message
-        </button>
+        <button type="button" class="btn-submit" onclick="handleSubmit(this)">
+  <i class="fas fa-paper-plane"></i>Send Message
+</button>
       </div>
     </div>
   </div>
@@ -1931,23 +1931,38 @@ window.addEventListener('scroll', () => {
 });
 
 /* ═══ CONTACT FORM ═══ */
+
 function handleSubmit(btn) {
-  const originalHtml = btn.innerHTML;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>Sending...';
-  btn.disabled = true;
 
-  setTimeout(() => {
-    btn.innerHTML = '<i class="fas fa-check"></i>Message Sent!';
-    btn.style.background = 'linear-gradient(135deg, #059669, #10b981)';
+    const form = btn.closest('.contact-form');
 
-    setTimeout(() => {
-      btn.innerHTML = originalHtml;
-      btn.style.background = '';
-      btn.disabled = false;
-      // Clear form
-      btn.closest('.contact-form').querySelectorAll('input, textarea').forEach(f => f.value = '');
-    }, 3000);
-  }, 1800);
+    const textInputs = form.querySelectorAll('input[type="text"]');
+
+    const name = textInputs[0].value;
+
+    const subject = textInputs[1].value;
+
+    const email = form.querySelector('input[type="email"]').value;
+
+    const message = form.querySelector('textarea').value;
+
+    const whatsappNumber = "2349014502151";
+
+    const text = 
+`Hello Prince Gift
+
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${message}`;
+
+    const whatsappURL =
+`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+
+    window.open(whatsappURL, '_blank');
+
 }
 
 /* ═══ SMOOTH ACTIVE NAV ═══ */
